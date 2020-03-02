@@ -6,10 +6,13 @@ class Transcriptor {
     ["A", "U"]
   ]);
 
-  toRna(nucleotide: string): string {
-    if (!Transcriptor.sequenceMap.has(nucleotide))
-      throw new Error("Invalid input DNA.");
-    return Transcriptor.sequenceMap.get(nucleotide) || "";
+  toRna(strand: string): string {
+    return strand.split("").reduce((acc, curr) => {
+      if (!Transcriptor.sequenceMap.has(curr))
+        throw new Error("Invalid input DNA.");
+      acc += Transcriptor.sequenceMap.get(curr) || "";
+      return acc;
+    }, "");
   }
 }
 
